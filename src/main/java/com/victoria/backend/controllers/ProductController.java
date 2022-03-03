@@ -3,10 +3,13 @@ package com.victoria.backend.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.victoria.backend.exceptions.ResourceNotFoundException;
 import com.victoria.backend.models.Product;
 import com.victoria.backend.repositories.ProductRepository;
 
@@ -24,6 +27,14 @@ public class ProductController {
 	public List <Product> getAllProducts() {
 		return productRepo.findAll();
 	}
-	
+	//ResponseEntity represents the whole HTTP response: status code, headers, and body.
+	//@PathVariable is a Spring annotation which indicates that a method parameter should be bound to a URI template variable.
+
+	@GetMapping("product/{id}")
+	public ResponseEntity<Product> getProductById(@PathVariable int id) {
+		Product product = productRepo.findById(id)
+				.orElseThrow(()-> new ResourceNotFoundException("Product not found."));
+				return ResponseEntity.ok(product);
+	};
 
 }
