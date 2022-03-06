@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+// an entity represents a table in a relational database, and each entity instance corresponds to a row in that table. The primary programming artifact of an entity is the entity class, although entities can use helper classes.
 @Entity
 @Table(name="cameras")
 public class Camera {
@@ -50,6 +50,7 @@ public class Camera {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	@Column
 	private String camname;
 	@Column
 	private String price;
