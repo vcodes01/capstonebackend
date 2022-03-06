@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import com.victoria.backend.models.Camera;
 
- 
-//@Repository is a spring annotation that indicated that the 
+ // JPAreposiroty - JPA stands for Java Persistance API - It contains API for basic CRUD operations and it can also do pagination and sorting      
+//@Repository is a spring annotation that indicated t
 @Repository
 public interface CameraRepository extends JpaRepository<Camera, Integer> {
 

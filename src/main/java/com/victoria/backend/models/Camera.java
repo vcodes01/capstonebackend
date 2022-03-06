@@ -8,8 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 // an entity represents a table in a relational database, and each entity instance corresponds to a row in that table. The primary programming artifact of an entity is the entity class, although entities can use helper classes.
 @Entity
-@Table(name="cameras")
+@Table(name="cameras") //the name="___" needs to match the table name in your database
 public class Camera {
+//GenerationType.IDENTITY indicates that the persistence provider must assign primary keys for the entity using database identify column
+//All annotations (@___) are located right above the objects or things you want to connect to
 	@Id
 	@Column
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

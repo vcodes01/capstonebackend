@@ -27,12 +27,12 @@ import com.victoria.backend.repositories.CameraRepository;
 @RequestMapping("/api/v1/") //thats what all of the end points start with
 public class CameraController {
 	
-//	                                AUTOWIRED
+//	                                         AUTOWIRED
 //	Reminder: all Spring beans are handled in our Spring container AKA Application Context.
 //	Our Spring container handles all of our objects (Beans), that includes definitions, WIRING them automatically, sending them out whenever we need them, creation, and deletion.
 //all of our beans are AUTOWIRED in the Spring Container
 //Autowiring happens by placing an instance of one bean into an instance of another bean.
-//Annotaion Autowired is a feature in Spring framework that enables dependency injection implicitly.
+//Annotation Autowired is a feature in Spring framework that enables dependency injection implicitly.
 //Tells our application context to inject an instance of CameraRepository in this class.
 	
 	@Autowired
@@ -46,14 +46,14 @@ public class CameraController {
 	
 //ResponseEntity represents the whole HTTP response: status code, headers, and body.
 //@PathVariable is a Spring annotation which indicates that a method parameter should be bound to a URI template variable
-	@GetMapping("camera/{id}")
+	@GetMapping("camera/{id}")  //CRUD READ | Get the resource with given id
 	public ResponseEntity<Camera> getCameraById(@PathVariable int id) {
 		Camera camera = cameraRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Camera not found."));
 				return ResponseEntity.ok(camera);
 	}
 	
-	@GetMapping("allcameras/{camname}")
+	@GetMapping("allcameras/{camname}") // 
 	public List<Camera> getCamerasByCamname(@PathVariable String camname) {
 		List<Camera> cameras = cameraRepo.findByCamname(camname);
 		if(cameras.isEmpty()) {
@@ -63,12 +63,12 @@ public class CameraController {
 	}
 	
 //	Saves a given entity. Create camera
-	@PostMapping("addcamera")
+	@PostMapping("addcamera") //CRUD CREATE | Used to create a new resource
 	public Camera newCamera(@RequestBody Camera camera) {
 		return cameraRepo.save(camera);
 	}	
 	
-	@PutMapping("camera/{id}")
+	@PutMapping("camera/{id}") //CRUD UPDATE | Updates a resource with given id
 	public ResponseEntity<Camera> updateCamera(@PathVariable int id, @RequestBody Camera newCameraInfo) {
 		Camera foundCamera = cameraRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Camera not found."));
@@ -83,7 +83,7 @@ public class CameraController {
 	}
 	
 //	Use PathVariable to grab the value of {id} parameter from URI
-	@DeleteMapping("camera/{id}")
+	@DeleteMapping("camera/{id}") // Deletes the resource with the given id
 	public ResponseEntity<String> deleteCamera(@PathVariable int id) {
 //		Find user we want to delete
 		cameraRepo.findById(id)
